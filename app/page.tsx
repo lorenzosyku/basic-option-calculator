@@ -1,17 +1,18 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/lib/auth/context/AuthContext";
-import { ArrowRight, Book, BookOpenCheck, CreditCard, Database, ThumbsUp, UserCheck } from "lucide-react";
+import { ArrowRight, Book, Plus, ThumbsUp, UserCheck } from "lucide-react";
 import OptChartUI from "./components/OptChartUI";
 import Link from "next/link";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@radix-ui/react-accordion";
 
 export default function HomePage() {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleExpand = () => {
-    setIsExpanded((prev) => !prev);
-  };
+  
   return (
     <main>
       <section className="py-20">
@@ -21,7 +22,7 @@ export default function HomePage() {
               <h1 className="text-4xl font-bold text-gray-900 tracking-tight sm:text-5xl md:text-6xl">
                 Demystify Quantitative Finance
                 <span className="block text-orange-500">
-                  The Science Behind Smarter Strategies.
+                  The Science Behind Smarter Trades.
                 </span>
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
@@ -113,48 +114,17 @@ export default function HomePage() {
               .
             </div>
           </div>
-          <ul className="basis-1/2">
-            <li>
-              <button
-                onClick={toggleExpand}
-                className="relative flex gap-2 items-center w-full py-5 text-base font-semibold text-left border-t md:text-lg border-base-content/10"
-                aria-expanded={isExpanded}
-              >
-                <span className="flex-1 text-base-content">
+          <Accordion className="border-t basis-1/2" type="single" collapsible>
+            <AccordionItem
+              value="quant-finance1"
+              className="space-y-5  border-b border-base-content/10 py-5"
+            >
+              <AccordionTrigger className="text-xl font-semibold text-left  ">
+                <span className="text-base-content">
                   What is Quantitative Finance?
                 </span>
-                <svg
-                  className={`flex-shrink-0 w-4 h-4 ml-auto fill-current transform transition-transform duration-200 ${
-                    isExpanded ? "rotate-90" : ""
-                  }`}
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect
-                    y="7"
-                    width="16"
-                    height="2"
-                    rx="1"
-                    className="origin-center"
-                  ></rect>
-                  <rect
-                    y="7"
-                    width="16"
-                    height="2"
-                    rx="1"
-                    className="origin-center rotate-90"
-                  ></rect>
-                </svg>
-              </button>
-              <div
-                className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                  isExpanded ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-                }`}
-                style={{
-                  maxHeight: isExpanded ? "200px" : "0px",
-                  opacity: isExpanded ? 1 : 0,
-                }}
-              >
+              </AccordionTrigger>
+              <AccordionContent>
                 <div className="pb-5 leading-relaxed">
                   <div className="space-y-4 leading-relaxed">
                     <p>
@@ -165,49 +135,16 @@ export default function HomePage() {
                     </p>
                   </div>
                 </div>
-              </div>
-            </li>
-            <li>
-              <button
-                onClick={toggleExpand}
-                className="relative flex gap-2 items-center w-full py-5 text-base font-semibold text-left border-t md:text-lg border-base-content/10"
-                aria-expanded={isExpanded}
-              >
-                <span className="flex-1 text-base-content">
-                  Why Trade Options?
-                </span>
-                <svg
-                  className={`flex-shrink-0 w-4 h-4 ml-auto fill-current transform transition-transform duration-200 ${
-                    isExpanded ? "rotate-90" : ""
-                  }`}
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect
-                    y="7"
-                    width="16"
-                    height="2"
-                    rx="1"
-                    className="origin-center"
-                  ></rect>
-                  <rect
-                    y="7"
-                    width="16"
-                    height="2"
-                    rx="1"
-                    className="origin-center rotate-90"
-                  ></rect>
-                </svg>
-              </button>
-              <div
-                className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                  isExpanded ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-                }`}
-                style={{
-                  maxHeight: isExpanded ? "200px" : "0px",
-                  opacity: isExpanded ? 1 : 0,
-                }}
-              >
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem
+              value="quant-finance2"
+              className="space-y-5  border-b border-base-content/10 py-5"
+            >
+              <AccordionTrigger className="text-xl font-semibold text-left  ">
+                <span className="text-base-content">Why Trade Options?</span>
+              </AccordionTrigger>
+              <AccordionContent>
                 <div className="pb-5 leading-relaxed">
                   <div className="space-y-4 leading-relaxed">
                     <p>
@@ -218,49 +155,18 @@ export default function HomePage() {
                     </p>
                   </div>
                 </div>
-              </div>
-            </li>
-            <li>
-              <button
-                onClick={toggleExpand}
-                className="relative flex gap-2 items-center w-full py-5 text-base font-semibold text-left border-t md:text-lg border-base-content/10"
-                aria-expanded={isExpanded}
-              >
-                <span className="flex-1 text-base-content">
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem
+              value="quant-finance3"
+              className="space-y-5 border-b border-base-content/10 py-5"
+            >
+              <AccordionTrigger className="text-xl font-semibold text-left  ">
+                <span className="text-base-content">
                   Why Choose Our Calculator?
                 </span>
-                <svg
-                  className={`flex-shrink-0 w-4 h-4 ml-auto fill-current transform transition-transform duration-200 ${
-                    isExpanded ? "rotate-90" : ""
-                  }`}
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect
-                    y="7"
-                    width="16"
-                    height="2"
-                    rx="1"
-                    className="origin-center"
-                  ></rect>
-                  <rect
-                    y="7"
-                    width="16"
-                    height="2"
-                    rx="1"
-                    className="origin-center rotate-90"
-                  ></rect>
-                </svg>
-              </button>
-              <div
-                className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                  isExpanded ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-                }`}
-                style={{
-                  maxHeight: isExpanded ? "200px" : "0px",
-                  opacity: isExpanded ? 1 : 0,
-                }}
-              >
+              </AccordionTrigger>
+              <AccordionContent>
                 <div className="pb-5 leading-relaxed">
                   <div className="space-y-4 leading-relaxed">
                     <p>
@@ -271,9 +177,9 @@ export default function HomePage() {
                     </p>
                   </div>
                 </div>
-              </div>
-            </li>
-          </ul>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </section>
 
@@ -291,7 +197,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="mt-8 lg:mt-0 flex justify-center lg:justify-end">
-              <a href="" target="_blank">
+              <a href="">
                 <Button className="bg-white hover:bg-gray-100 text-black border border-gray-200 rounded-full text-xl px-12 py-6 inline-flex items-center justify-center">
                   View the code
                   <ArrowRight className="ml-3 h-6 w-6" />
