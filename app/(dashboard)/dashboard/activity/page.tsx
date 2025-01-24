@@ -11,7 +11,7 @@ import {
   doc,
 } from "firebase/firestore";
 import { onAuthStateChanged, User } from "firebase/auth";
-import { db, auth } from "../../../../lib/auth/firebase";
+import { db, auth } from "../../../../lib/firebase";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Loader2, Trash2 } from "lucide-react";
@@ -26,12 +26,13 @@ import {
   Legend,
 } from "recharts";
 import CustomTooltip from "../../../components/CostumTooltip";
-import  getRandomColor  from "../../../../lib/getColors";
-import { SavedCalculation, SavedCalculationsProps } from "../../../../types/optionCalcTypes";
+import getRandomColor from "../../../../lib/getColors";
+import {
+  SavedCalculation,
+  SavedCalculationsProps,
+} from "../../../../types/optionCalcTypes";
 
-const SavedCalculations: React.FC<SavedCalculationsProps> = ({
-
-}) => {
+const SavedCalculations: React.FC<SavedCalculationsProps> = ({}) => {
   const [savedCalculations, setSavedCalculations] = useState<
     SavedCalculation[]
   >([]);
@@ -103,8 +104,6 @@ const SavedCalculations: React.FC<SavedCalculationsProps> = ({
       setError("Failed to delete calculation");
     }
   };
-  
-  
 
   return (
     <Card className="mt-6">
@@ -205,7 +204,6 @@ const SavedCalculations: React.FC<SavedCalculationsProps> = ({
                                     strokeWidth={1.2}
                                   />
                                 ))}
-                                
                               </LineChart>
                             </ResponsiveContainer>
                           </CardContent>

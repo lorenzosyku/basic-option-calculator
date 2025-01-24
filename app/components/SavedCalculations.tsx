@@ -7,21 +7,22 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
-import { db } from "../../lib/auth/firebase";
+import { db } from "../../lib/firebase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, Save } from "lucide-react";
 
-import { SavedCalculation, SavedCalculationsProps } from "../../types/optionCalcTypes";
+import {
+  SavedCalculation,
+  SavedCalculationsProps,
+} from "../../types/optionCalcTypes";
 
 const SavedCalculations: React.FC<SavedCalculationsProps> = ({
   userId,
   currentCalculation,
 }) => {
-  const [savedCalculations, setSavedCalculations] = useState<
-    SavedCalculation[]
-  >([]);
+ 
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [calculationNotes, setCalculationNotes] = useState<string>("");
@@ -81,18 +82,11 @@ const SavedCalculations: React.FC<SavedCalculationsProps> = ({
         calculationNotes,
       };
 
-      const docRef = await addDoc(
+      await addDoc(
         collection(db, "calculations"),
         calculationData
       );
 
-      setSavedCalculations((prev) => [
-        {
-          ...calculationData,
-          id: docRef.id,
-        },
-        ...prev,
-      ]);
 
       // Update save tracking
       setLastSaveTimestamp(now);

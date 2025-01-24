@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/auth/context/AuthContext";
 import { ArrowRight, Book, BookOpenCheck, CreditCard, Database, ThumbsUp, UserCheck } from "lucide-react";
-import OptChartUI from "./OptChartUI";
+import OptChartUI from "./components/OptChartUI";
 import Link from "next/link";
 
 export default function HomePage() {
