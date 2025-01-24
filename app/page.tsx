@@ -20,15 +20,15 @@ const accordionData = [
   },
   {
     value: "quant-finance2",
-    title: "Key Concepts in Quantitative Finance",
+    title: "Why Trade Options?",
     content:
-      "Quantitative finance involves mathematical modeling, statistical analysis, and computational techniques to solve financial problems and make informed investment decisions.",
+      "Options trading gives you the flexibility to manage risk, generate income, or speculate with limited downside. Mastering these tools can turn market volatility into opportunity.",
   },
   {
     value: "quant-finance3",
-    title: "Applications of Quantitative Finance",
+    title: "Why choose our calculator?",
     content:
-      "From algorithmic trading to risk management, quantitative finance plays a crucial role in modern financial markets, helping institutions and investors make data-driven decisions.",
+      "With our intuitive options calculator, you’ll go beyond simple formulas to visualize scenarios and strategies.Whether you're evaluating Black-Scholes pricing or exploring advanced Greeks, we make the math work for you.",
   },
 ];
 
@@ -161,101 +161,15 @@ export default function HomePage() {
                   </span>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <div className="pb-5 leading-relaxed">
-                    <div className="space-y-4 leading-relaxed">
-                      <p>{item.content}</p>
+                  <div className="pb-5 duration-200">
+                    <div className="space-y-4 ">
+                      <p className="leading-relaxed">{item.content}</p>
                     </div>
                   </div>
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
-          {/* <Accordion
-            className="border-t basis-1/2"
-            type="single"
-            collapsible
-            onValueChange={(value) =>
-              setIsOpen(
-                value === "quant-finance1" ||
-                  value === "quant-finance2" ||
-                  value === "quant-finance3"
-              )
-            }
-          >
-            <AccordionItem
-              value="quant-finance1"
-              className="space-y-5  border-b border-base-content/10 py-5"
-            >
-              <AccordionTrigger className="text-xl font-semibold text-left">
-                <span
-                  className={`
-            ${isOpen ? "text-orange-500" : "text-base-content"} 
-            transition-colors duration-200
-          `}
-                >
-                  What is Quantitative Finance?
-                </span>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="pb-5 leading-relaxed">
-                  <div className="space-y-4 leading-relaxed">
-                    <p>
-                      "At its core, quantitative finance is about understanding
-                      the mathematical framework of risk and reward. Options,
-                      derivatives, and hedging aren’t just tools—they’re
-                      strategies to make uncertainty work for you."
-                    </p>
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem
-              value="quant-finance2"
-              className="space-y-5  border-b border-base-content/10 py-5"
-            >
-              <AccordionTrigger className="text-xl font-semibold text-left  ">
-              <span
-                  className={`
-            ${isOpen ? "text-orange-500" : "text-base-content"} 
-            transition-colors duration-200
-          `}>Why Trade Options?</span>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="pb-5 leading-relaxed">
-                  <div className="space-y-4 leading-relaxed">
-                    <p>
-                      "Options trading gives you the flexibility to manage risk,
-                      generate income, or speculate with limited downside.
-                      Mastering these tools can turn market volatility into
-                      opportunity."
-                    </p>
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem
-              value="quant-finance3"
-              className="space-y-5 border-b border-base-content/10 py-5"
-            >
-              <AccordionTrigger className="text-xl font-semibold text-left  ">
-                <span className="text-base-content">
-                  Why Choose Our Calculator?
-                </span>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="pb-5 leading-relaxed">
-                  <div className="space-y-4 leading-relaxed">
-                    <p>
-                      "With our intuitive options calculator, you’ll go beyond
-                      simple formulas to visualize scenarios and strategies.
-                      Whether you're evaluating Black-Scholes pricing or
-                      exploring advanced Greeks, we make the math work for you."
-                    </p>
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion> */}
         </div>
       </section>
 
