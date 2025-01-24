@@ -11,8 +11,29 @@ import {
   AccordionTrigger,
 } from "@radix-ui/react-accordion";
 
+const accordionData = [
+  {
+    value: "quant-finance1",
+    title: "What is Quantitative Finance?",
+    content:
+      "\"At its core, quantitative finance is about understanding the mathematical framework of risk and reward. Options, derivatives, and hedging aren't just tools—they're strategies to make uncertainty work for you.\"",
+  },
+  {
+    value: "quant-finance2",
+    title: "Key Concepts in Quantitative Finance",
+    content:
+      "Quantitative finance involves mathematical modeling, statistical analysis, and computational techniques to solve financial problems and make informed investment decisions.",
+  },
+  {
+    value: "quant-finance3",
+    title: "Applications of Quantitative Finance",
+    content:
+      "From algorithmic trading to risk management, quantitative finance plays a crucial role in modern financial markets, helping institutions and investors make data-driven decisions.",
+  },
+];
+
 export default function HomePage() {
-  
+  const [openValue, setOpenValue] = useState<string | null>(null);
   return (
     <main>
       <section className="py-20">
@@ -39,7 +60,6 @@ export default function HomePage() {
               </div>
             </div>
             <div className=" mt-10 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
-              {/* <Terminal /> */}
               <OptChartUI />
             </div>
           </div>
@@ -114,13 +134,65 @@ export default function HomePage() {
               .
             </div>
           </div>
-          <Accordion className="border-t basis-1/2" type="single" collapsible>
+          <Accordion
+            className="basis-1/2 border-t"
+            type="single"
+            collapsible
+            onValueChange={(value) => setOpenValue(value)}
+          >
+            {accordionData.map((item) => (
+              <AccordionItem
+                key={item.value}
+                value={item.value}
+                className="space-y-5 border-b border-base-content/10 py-5"
+              >
+                <AccordionTrigger className="text-xl font-semibold text-left">
+                  <span
+                    className={`
+              ${
+                openValue === item.value
+                  ? "text-orange-500"
+                  : "text-base-content"
+              } 
+              transition-colors duration-200
+            `}
+                  >
+                    {item.title}
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="pb-5 leading-relaxed">
+                    <div className="space-y-4 leading-relaxed">
+                      <p>{item.content}</p>
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+          {/* <Accordion
+            className="border-t basis-1/2"
+            type="single"
+            collapsible
+            onValueChange={(value) =>
+              setIsOpen(
+                value === "quant-finance1" ||
+                  value === "quant-finance2" ||
+                  value === "quant-finance3"
+              )
+            }
+          >
             <AccordionItem
               value="quant-finance1"
               className="space-y-5  border-b border-base-content/10 py-5"
             >
-              <AccordionTrigger className="text-xl font-semibold text-left  ">
-                <span className="text-base-content">
+              <AccordionTrigger className="text-xl font-semibold text-left">
+                <span
+                  className={`
+            ${isOpen ? "text-orange-500" : "text-base-content"} 
+            transition-colors duration-200
+          `}
+                >
                   What is Quantitative Finance?
                 </span>
               </AccordionTrigger>
@@ -142,7 +214,11 @@ export default function HomePage() {
               className="space-y-5  border-b border-base-content/10 py-5"
             >
               <AccordionTrigger className="text-xl font-semibold text-left  ">
-                <span className="text-base-content">Why Trade Options?</span>
+              <span
+                  className={`
+            ${isOpen ? "text-orange-500" : "text-base-content"} 
+            transition-colors duration-200
+          `}>Why Trade Options?</span>
               </AccordionTrigger>
               <AccordionContent>
                 <div className="pb-5 leading-relaxed">
@@ -179,7 +255,7 @@ export default function HomePage() {
                 </div>
               </AccordionContent>
             </AccordionItem>
-          </Accordion>
+          </Accordion> */}
         </div>
       </section>
 
