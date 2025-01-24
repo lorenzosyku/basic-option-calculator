@@ -14,7 +14,7 @@ import { onAuthStateChanged, User } from "firebase/auth";
 import { db, auth } from "../../../../lib/auth/firebase";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Loader2, Save, Trash2 } from "lucide-react";
+import { Loader2, Trash2 } from "lucide-react";
 import {
   ResponsiveContainer,
   LineChart,
@@ -25,53 +25,12 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-
-interface Position {
-  id: string;
-  optionType: string;
-  contracts: string;
-  strikePrice: string;
-  optionPrice: string;
-}
-
-interface Results {
-  breakEvenPrices: number[];
-  totalInvestment: number;
-  maxLoss: number;
-  analysisPoints: Array<{
-    price: string;
-    totalProfit: string;
-    returnPercentage: string;
-  }>;
-  chartData: Array<{
-    price: number;
-    totalProfit: number;
-    [key: string]: number;
-  }>;
-}
-
-interface SavedCalculation {
-  id?: string;
-  userId: string;
-  stockPrice: string;
-  positions: Position[];
-  results: Results;
-  createdAt: Timestamp;
-  calculationNotes?: string;
-}
-
-interface SavedCalculationsProps {
-  userId: string;
-  currentCalculation: {
-    stockPrice: string;
-    positions: Position[];
-    results: Results | null;
-  };
-  onLoadCalculation: (calculation: SavedCalculation) => void;
-}
+import CustomTooltip from "../../../components/CostumTooltip";
+import  getRandomColor  from "../../../../lib/getColors";
+import { SavedCalculation, SavedCalculationsProps } from "../../../../types/optionCalcTypes";
 
 const SavedCalculations: React.FC<SavedCalculationsProps> = ({
-  onLoadCalculation,
+
 }) => {
   const [savedCalculations, setSavedCalculations] = useState<
     SavedCalculation[]
@@ -144,35 +103,8 @@ const SavedCalculations: React.FC<SavedCalculationsProps> = ({
       setError("Failed to delete calculation");
     }
   };
-  const getRandomColor = (index: number) => {
-    const colors = ["#d5896f", "#a5be00", "#003f88", "#FFB703", "#757bc8"];
-    return colors[index % colors.length];
-  };
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="custom-tooltip bg-white p-2 border rounded shadow">
-          <p className="label">
-            <strong>Stock Price:</strong> ${parseFloat(label).toFixed(2)}
-          </p>
-          {payload.map((entry: any, index: number) => {
-            const value = entry.value;
-            const valueClass =
-              value > 0 ? "text-green-500" : value < 0 ? "text-red-500" : "";
-            return (
-              <p
-                key={`tooltip-${index}`}
-                className={`font-medium ${valueClass}`}
-              >
-                <strong>{entry.name}:</strong> ${value.toFixed(2)}
-              </p>
-            );
-          })}
-        </div>
-      );
-    }
-    return null;
-  };
+  
+  
 
   return (
     <Card className="mt-6">
