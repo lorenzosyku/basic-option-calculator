@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -6,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-//import { Alert, AlertDescription } from '../components/ui/alert'
 import { Loader2 } from "lucide-react";
 import { signUp } from "@/lib/auth/auth";
 import Link from "next/link";
@@ -16,7 +14,7 @@ export default function SignUpPage() {
  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,8 +25,10 @@ export default function SignUpPage() {
     try {
       await signUp(email, password);
       router.push("/dashboard");
-    } catch (error: any) {
-      setError(error.message);
+    } catch (error: unknown) {
+      // Type-safe error handling
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -43,13 +43,12 @@ export default function SignUpPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
+          {error && (
+            <div className="text-red-500 text-sm mb-4">
+              {error}
+            </div>
+          )}
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* {error && (
-              <Alert variant="destructive">
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )} */}
-
             <div>
               <Input
                 type="email"

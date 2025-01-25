@@ -1,4 +1,3 @@
-// app/login/page.tsx
 'use client'
 
 import { useState } from 'react'
@@ -16,7 +15,7 @@ export default function LoginPage() {
   const { signIn, signInWithGoogle } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [error, setError] = useState<string>('')
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,9 +26,11 @@ export default function LoginPage() {
     try {
       await signIn(email, password)
       router.push('./dashboard')
-    } catch (error: any) {
-      setError(error.message)
-    console.error('Sign-in error:', error.message)
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      setError(errorMessage)
+      console.error('Sign-in error:', errorMessage)
+    } finally {
       setLoading(false)
     }
   }
@@ -38,8 +39,9 @@ export default function LoginPage() {
     try {
       await signInWithGoogle()
       router.push('./dashboard')
-    } catch (error: any) {
-      setError(error.message)
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      setError(errorMessage)
     }
   }
 
@@ -124,7 +126,7 @@ export default function LoginPage() {
             </Button>
 
             <div className="text-center text-sm">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link href="/sign-up" className="text-blue-600 hover:text-blue-500">
                 Sign up
               </Link>
