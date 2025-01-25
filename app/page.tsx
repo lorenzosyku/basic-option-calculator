@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Book, Plus, ThumbsUp, UserCheck } from "lucide-react";
+import { ArrowRight, Book, ThumbsUp, UserCheck } from "lucide-react";
 import OptChartUI from "./components/OptChartUI";
 import Link from "next/link";
 import {
@@ -178,12 +178,12 @@ export default function HomePage() {
           <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                "In finance, as in life, uncertainty is inevitable—but
-                understanding it is a choice. Make that choice today."
+                &quot;In finance, as in life, uncertainty is inevitable—but
+                understanding it is a choice. Make that choice today.&quot;
               </h2>
               <p className="mt-3 max-w-3xl text-lg text-gray-500">
                 Start your journey into quantitative finance today. Create an
-                account and see how we make complex ideas intuitive."
+                account and see how we make complex ideas intuitive.
               </p>
             </div>
             <div className="mt-8 lg:mt-0 flex justify-center lg:justify-end">

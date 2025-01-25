@@ -1,7 +1,5 @@
-// contexts/AuthContext.tsx
-"use client";
-
-import { createContext, useContext, useEffect, useState } from "react";
+'use client'
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import {
   Auth,
   User,
@@ -10,28 +8,31 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  UserCredential,
 } from "firebase/auth";
 import { auth } from "../../firebase";
 
-interface AuthContextProps {
+export interface AuthContextType {
   auth: Auth;
   user: User | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string) => Promise<void>;
-  signInWithGoogle: () => Promise<void>;
+  signIn: (email: string, password: string) => Promise<UserCredential>;
+  signUp: (email: string, password: string) => Promise<UserCredential>;
+  signInWithGoogle: () => Promise<UserCredential>;
   logout: () => Promise<void>;
 }
 
-const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
+export interface AuthProviderProps {
+  children: ReactNode;
+}
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user: any) => {
-      setUser(user);
+    const unsubscribe = auth.onAuthStateChanged((currentUser: User | null) => {
+      setUser(currentUser);
       setLoading(false);
     });
 
@@ -39,20 +40,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    await signInWithEmailAndPassword(auth, email, password);
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   const signUp = async (email: string, password: string) => {
-    await createUserWithEmailAndPassword(auth, email, password);
+    return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    return signInWithPopup(auth, provider);
   };
 
   const logout = async () => {
-    await signOut(auth);
+    return signOut(auth);
   };
 
   return (
@@ -72,4 +73,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export const useAuth = () => useContext(AuthContext);
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  
+  return context;
+};

@@ -1,5 +1,5 @@
 // Place this code in your Next.js component file, e.g., components/Logo.js
-import { Search } from 'lucide-react';
+
 export default function Logo() {
   return (
     <div className="flex items-center">
