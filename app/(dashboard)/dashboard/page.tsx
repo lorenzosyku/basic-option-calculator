@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/table";
 
 import { useAuth } from "@/lib/auth/context/AuthContext";
-import SavedCalculations from "../../components/SavedCalculations";
+import SaveCalculationsToDB from "../../components/SavedCalculations";
 
 import {
   Select,
@@ -437,7 +437,7 @@ const Dashboard = () => {
             </div>
           )}
           {user && (
-            <SavedCalculations
+            <SaveCalculationsToDB
               userId={user.uid}
               currentCalculation={{
                 stockPrice,

@@ -18,7 +18,7 @@ import {
   SavedCalculationsProps,
 } from "../../types/optionCalcTypes";
 
-const SavedCalculations: React.FC<SavedCalculationsProps> = ({
+const SaveCalculationsToDB: React.FC<SavedCalculationsProps> = ({
   userId,
   currentCalculation,
 }) => {
@@ -145,4 +145,4 @@ const SavedCalculations: React.FC<SavedCalculationsProps> = ({
   );
 };
 
-export default SavedCalculations;
+export default SaveCalculationsToDB;

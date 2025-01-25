@@ -26,12 +26,9 @@ import {
 } from "recharts";
 import CustomTooltip from "../../../components/CostumTooltip";
 import getRandomColor from "../../../../lib/getColors";
-import {
-  SavedCalculation,
-  SavedCalculationsProps,
-} from "../../../../types/optionCalcTypes";
+import { SavedCalculation } from "../../../../types/optionCalcTypes";
 
-const SavedCalculations: React.FC<SavedCalculationsProps> = ({}) => {
+const ReadSavedCalculations = () => {
   const [savedCalculations, setSavedCalculations] = useState<
     SavedCalculation[]
   >([]);
@@ -229,4 +226,4 @@ const SavedCalculations: React.FC<SavedCalculationsProps> = ({}) => {
   );
 };
 
-export default SavedCalculations;
+export default ReadSavedCalculations;
