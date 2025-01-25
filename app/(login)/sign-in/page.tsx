@@ -7,7 +7,7 @@ import { useAuth } from '../../../lib/auth/context/AuthContext'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-//import { Alert, AlertDescription } from '../components/ui/alert'
+import { Alert, AlertDescription } from '../../../components/ui/alert'
 import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -29,7 +29,7 @@ export default function LoginPage() {
       router.push('./dashboard')
     } catch (error: any) {
       setError(error.message)
-    } finally {
+    console.error('Sign-in error:', error.message)
       setLoading(false)
     }
   }
@@ -53,11 +53,11 @@ export default function LoginPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* {error && (
+            {error && (
               <Alert variant="destructive">
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
-            )} */}
+            )}
             
             <div>
               <Input
