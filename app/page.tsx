@@ -108,7 +108,7 @@ export default function HomePage() {
                   Built for Everyone:
                 </h2>
                 <p className="mt-2 text-base text-gray-500">
-                  Whether you're new to options or a seasoned trader, our
+                  Whether you are new to options or a seasoned trader, our
                   platform is your guide.
                 </p>
               </div>
