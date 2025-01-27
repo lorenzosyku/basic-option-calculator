@@ -1,6 +1,6 @@
 // types/optionCalculation.ts
 
-import { Timestamp } from 'firebase/firestore'; 
+import { Timestamp } from "firebase/firestore";
 
 export interface Position {
   id: string;
@@ -43,4 +43,25 @@ export interface SavedCalculationsProps {
     positions: Position[];
     results: Results | null;
   };
+}
+
+export interface Example {
+  parameters: {
+    [key: string]: number;
+  };
+  calculation: {
+    [key: string]: string | number;
+  };
+  interpretation: string;
+}
+
+export interface Greek {
+  title: string;
+  definition: string;
+  formula: string;
+  example: Example;
+}
+
+export interface Greeks {
+  concepts: Greek[];
 }

@@ -14,7 +14,7 @@ const greeks = {
           stock_price_decrease: 98,
         },
         calculation: {
-          delta: "(10.5 - 9.5) / (102 - 98)",
+          appliedFormula: "(10.5 - 9.5) / (102 - 98)",
           result: 0.25,
         },
         interpretation:
@@ -33,7 +33,7 @@ const greeks = {
           stock_price_change: 2,
         },
         calculation: {
-          gamma: "(0.30 - 0.25) / 2",
+          appliedFormula: "(0.30 - 0.25) / 2",
           result: 0.025,
         },
         interpretation:
@@ -51,7 +51,7 @@ const greeks = {
           call_option_price_increase: 0.5,
         },
         calculation: {
-          vega: "0.50 / 0.01",
+          appliedFormula: "0.50 / 0.01",
           result: 50,
         },
         interpretation:
@@ -70,7 +70,7 @@ const greeks = {
           time_passed: 1,
         },
         calculation: {
-          theta: "(4.90 - 5.00) / 1",
+          appliedFormula: "(4.90 - 5.00) / 1",
           result: -0.1,
         },
         interpretation:
@@ -88,7 +88,7 @@ const greeks = {
           call_option_price_increase: 0.2,
         },
         calculation: {
-          rho: "0.20 / 0.01",
+          appliedFormula: "0.20 / 0.01",
           result: 20,
         },
         interpretation:
@@ -106,7 +106,7 @@ const greeks = {
           volatility_change: 0.02,
         },
         calculation: {
-          vanna: "0.01 / 0.02",
+          appliedFormula: "0.01 / 0.02",
           result: 0.5,
         },
         interpretation:
@@ -125,7 +125,7 @@ const greeks = {
           time_passed: 1,
         },
         calculation: {
-          charm: "(0.48 - 0.50) / 1",
+          appliedFormula: "(0.48 - 0.50) / 1",
           result: -0.02,
         },
         interpretation: "For every day that passes, Delta decreases by 0.02.",
@@ -134,26 +134,105 @@ const greeks = {
   ],
 };
 
-const GreeksConcepts = ()=> {
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+const GreeksConcepts = () => {
+  const formatParameterKey = (key: string) => {
+    return key
+      .split("_")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
   return (
-    <div>
-      <h1>Options Greeks</h1>
-      {greeks.concepts.map((greek, index) => (
-        <div key={index}>
-          <h2>{greek.title}</h2>
-          <p>
-            <strong>Definition:</strong> {greek.definition}
-          </p>
-          {greek.formula && (
-            <p>
-              <strong>Formula:</strong> {greek.formula}
-            </p>
-          )}
-          <h3>Example:</h3>
-          <pre>{JSON.stringify(greek.example, null, 2)}</pre>
-        </div>
-      ))}
+    <div className="w-full max-w-4xl mx-auto space-y-6 p-4">
+      <h1 className="text-3xl font-bold mb-6">Options Greeks Reference</h1>
+
+      <Accordion type="single" collapsible className="w-full">
+        {greeks.concepts.map((greek, index) => (
+          <AccordionItem key={index} value={`item-${index}`}>
+            <AccordionTrigger className="text-xl font-semibold">
+              {greek.title}
+            </AccordionTrigger>
+            <AccordionContent>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Definition</CardTitle>
+                  <CardDescription>{greek.definition}</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold mb-2">Formula</h4>
+                    <code className="bg-slate-100 p-2 rounded">
+                      {greek.formula}
+                    </code>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold mb-2">Example</h4>
+
+                    <div className="space-y-4">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Parameter</TableHead>
+                            <TableHead>Value</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {Object.entries(greek.example.parameters).map(
+                            ([key, value]) => (
+                              <TableRow key={key}>
+                                <TableCell>{formatParameterKey(key)}</TableCell>
+                                <TableCell>{value}</TableCell>
+                              </TableRow>
+                            )
+                          )}
+                        </TableBody>
+                      </Table>
+
+                      <div className="bg-slate-50 p-4 rounded-lg">
+                        <h5 className="font-semibold mb-2">Calculation</h5>
+                        <div className="space-y-2">
+                          <div>
+                            Formula: {greek.example.calculation.appliedFormula}
+                          </div>
+                          <div>Result: {greek.example.calculation.result}</div>
+                        </div>
+                      </div>
+
+                      <div className="bg-blue-50 p-4 rounded-lg">
+                        <h5 className="font-semibold mb-2">Interpretation</h5>
+                        <p>{greek.example.interpretation}</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
     </div>
   );
-}
-export default GreeksConcepts
+};
+export default GreeksConcepts;
