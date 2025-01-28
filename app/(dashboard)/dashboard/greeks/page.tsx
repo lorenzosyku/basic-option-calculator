@@ -1,5 +1,5 @@
-const greeks = {
-  concepts: [
+ 
+  const greeks =[
     {
       title: "Delta (Δ)",
       definition:
@@ -131,8 +131,8 @@ const greeks = {
         interpretation: "For every day that passes, Delta decreases by 0.02.",
       },
     },
-  ],
-};
+  ]
+
 
 import {
   Accordion,
@@ -163,12 +163,13 @@ const GreeksConcepts = () => {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
+  
   return (
     <div className="w-full max-w-4xl mx-auto space-y-6 p-4">
       <h1 className="text-3xl font-bold mb-6">Options Greeks Reference</h1>
 
       <Accordion type="single" collapsible className="w-full">
-        {greeks.concepts.map((greek, index) => (
+        {greeks.map((greek, index) => (
           <AccordionItem key={index} value={`item-${index}`}>
             <AccordionTrigger className="text-xl font-semibold">
               {greek.title}
