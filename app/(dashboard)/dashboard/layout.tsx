@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Activity, Menu, CalculatorIcon, Book, SchoolIcon } from "lucide-react";
+import { Activity, Menu, CalculatorIcon, Book, SchoolIcon, TreeDeciduous } from "lucide-react";
 import { ProtectedRoutes } from "@/lib/auth/ProtectedRoutes";
 
 export default function DashboardLayout({
@@ -20,6 +20,7 @@ export default function DashboardLayout({
     { href: "/dashboard/activity", icon: Activity, label: "Activity" },
     { href: "/dashboard/strategies", icon: Book, label: "Strategies" },
     { href: "/dashboard/greeks", icon: SchoolIcon, label: "Greeks" },
+    { href: "/dashboard/binomalModel", icon: TreeDeciduous, label: "Binomal priceing Model" },
   ];
 
   return (
