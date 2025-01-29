@@ -20,7 +20,7 @@ export default function DashboardLayout({
     { href: "/dashboard/activity", icon: Activity, label: "Activity" },
     { href: "/dashboard/strategies", icon: Book, label: "Strategies" },
     { href: "/dashboard/greeks", icon: SchoolIcon, label: "Greeks" },
-    { href: "/dashboard/binomalModel", icon: TreeDeciduous, label: "Binomal priceing Model" },
+    { href: "/dashboard/binomalModel", icon: TreeDeciduous, label: "Binomal pricing Model" },
   ];
 
   return (
